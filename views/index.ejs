@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To Do List</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+    <div class="main_block">
+        <h1>My Tasks</h1>
+        <div class="list">
+            <img src="/images/list.png">
+        </div>
+        <a href="/add" class="add_btn">Добавить задачу</a>
+        <% tasks.forEach((task)=> { %>
+            <div class="task <%= task.isDone ? 'done' : '' %>">
+                <form action="/status/<%= task._id %>" method="POST">
+                    <input type="checkbox" onchange="this.form.submit()" <%=task.isDone? 'checked' : '' %>>
+                </form>
+                <span class="title"><%= task.title %></span>
+                <div class="options">
+                    <a href="/edit/<%= task._id %>" class="btn">✏️ Изменить</a>
+                    <form action="/delete/<%= task._id %>" method="POST" style="display: inline-block; margin-left: 10px;">
+                        <button onclick="return confirm('Вы действительно хотите удалить задачу?')">🗑️ Удалить</button>
+                    </form>
+                </div>
+            </div>
+            <p><%= moment(task.time).format('DD.MM.YYYY, HH:mm') %></p>
+            <% }) %>
+    </div>
+    </script>
+</body>
+</html>
