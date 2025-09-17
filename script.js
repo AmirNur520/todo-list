@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const path = require('path');
 const app = express();
 const moment = require('moment');
-const PORT = 8000;
+const PORT = process.env.PORT || 8000;
 
 require('dotenv').config()
 
@@ -25,7 +25,7 @@ const taskSchema = new mongoose.Schema({
     isDone: Boolean,
     time: {
         type: Date,
-        def: Date.now
+        default: Date.now
     }
 });
 
